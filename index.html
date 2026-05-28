@@ -1,5 +1,373 @@
 <!DOCTYPE html>
-<html>
-<head><title>我的测试页</title></head>
-<body><h1>Hello from GitHub Pages!</h1></body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球游戏排名前100名清单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4a90d9;
+            --secondary-color: #6c5ce7;
+            --accent-color: #00cec9;
+            --bg-color: #f8f9fa;
+            --text-color: #2d3436;
+            --light-text: #636e72;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-width: 1200px;
+        }
+
+        /* 导航栏 */
+        nav {
+            background: var(--white);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* 各区块通用样式 */
+        section {
+            padding: 100px 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        section h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Hero 区域 - 首页 */
+        #home {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            text-align: center;
+            padding-top: 150px;
+            min-height: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        /* 核心亮点 */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            color: var(--text-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--light-text);
+        }
+
+        /* 内容列表 */
+        #articles {
+            background: var(--white);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .article-card {
+            background: var(--bg-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .article-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .article-card p {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            font-size: 0.875rem;
+            color: var(--accent-color);
+        }
+
+        /* 关于我 */
+        #about {
+            background: var(--bg-color);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        /* 隐私政策 */
+        #privacy {
+            background: var(--white);
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin-top: 2rem;
+        }
+
+        .privacy-content p {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--text-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* 动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feature-card, .article-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="logo">🎮 游戏排行榜</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#articles">内容列表</a></li>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#privacy">隐私政策</a></li>
+        </ul>
+    </nav>
+
+    <!-- 首页 Hero -->
+    <section id="home">
+        <div class="container">
+            <h1 class="hero-title">全球游戏排名前100名清单</h1>
+            <p class="hero-subtitle">精选全球最受欢迎的游戏，为你呈现最权威的游戏排行榜</p>
+            
+            <!-- 三个核心亮点 -->
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>权威数据</h4>
+                    <p>基于全球玩家评分、销量、活跃度等多维度综合排名</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h4>全球视野</h4>
+                    <p>覆盖PC、主机、手游全平台，囊括各类型热门游戏</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>实时更新</h4>
+                    <p>每月更新排名，紧跟游戏市场动态与玩家趋势</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 内容列表 -->
+    <section id="articles">
+        <div class="container">
+            <h2>内容列表</h2>
+            <p style="color: var(--light-text); margin-bottom: 2rem;">精选文章，带你深入了解游戏世界</p>
+            
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3>2026年最受期待的10款新游戏</h3>
+                    <p>从开放世界冒险到竞技射击，盘点今年即将发布的重磅新作...</p>
+                    <p class="article-meta">文章内容待补充</p>
+                </div>
+                <div class="article-card">
+                    <h3>独立游戏崛起：小团队的惊人创意</h3>
+                    <p>当大厂忙着做续作时，独立开发者用创新玩法征服了玩家...</p>
+                    <p class="article-meta">文章内容待补充</p>
+                </div>
+                <div class="article-card">
+                    <h3>电竞风云：2026赛季展望</h3>
+                    <p>随着新赛季开启，各大战队蓄势待发，谁将问鼎冠军...</p>
+                    <p class="article-meta">文章内容待补充</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about">
+        <div class="container">
+            <h2>关于我</h2>
+            <div class="about-content">
+                <div class="about-avatar">👤</div>
+                <div class="about-text">
+                    <h3>作者介绍</h3>
+                    <p>我是一名热爱游戏的玩家，从童年起便沉迷于各种游戏世界。多年来，我见证了游戏行业的蓬勃发展，也积累了对各类游戏的独特见解。</p>
+                    <p>这个网站是我分享游戏见解的平台。我希望通过这份全球游戏排名清单，帮助更多玩家发现优质游戏，同时也记录下我对游戏世界的观察与思考。</p>
+                    <p><strong>网站用途：</strong>整理并分享全球最受欢迎的游戏排名，提供游戏评测、行业动态、玩家故事等内容，为游戏爱好者提供一个交流与发现的空间。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 隐私政策 -->
+    <section id="privacy">
+        <div class="container">
+            <h2>隐私政策</h2>
+            <div class="privacy-content">
+                <h3 style="margin-bottom: 1rem;">数据收集与使用</h3>
+                <p>本网站尊重用户隐私，不主动收集任何个人信息。浏览本网站时，我们不会记录您的身份信息或浏览行为。</p>
+                
+                <h3 style="margin: 2rem 0 1rem;">Cookie 使用</h3>
+                <p>本网站不使用任何跟踪 Cookie。您的浏览体验完全私密且安全。</p>
+                
+                <h3 style="margin: 2rem 0 1rem;">第三方链接</h3>
+                <p>本网站可能包含指向外部网站的链接。这些外部网站的隐私政策不在本声明范围内，建议您阅读相关网站的隐私政策。</p>
+                
+                <h3 style="margin: 2rem 0 1rem;">政策更新</h3>
+                <p>本隐私政策可能随时更新。如有重大变更，我们将在网站上发布通知。</p>
+                
+                <p style="margin-top: 2rem;"><strong>最后更新日期：</strong>2026年5月28日</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2026 全球游戏排名前100名清单 | 联系邮箱：placeholder@example.com</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">
+            <a href="#home">首页</a> · 
+            <a href="#articles">内容列表</a> · 
+            <a href="#about">关于我</a> · 
+            <a href="#privacy">隐私政策</a>
+        </p>
+    </footer>
+
+</body>
 </html>
