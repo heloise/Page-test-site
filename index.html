@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全球游戏排名前100名清单</title>
+    <title>全球游戏殿堂 | 前100名游戏榜单</title>
     <style>
         * {
             margin: 0;
@@ -11,363 +11,546 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #4a90d9;
-            --secondary-color: #6c5ce7;
-            --accent-color: #00cec9;
-            --bg-color: #f8f9fa;
-            --text-color: #2d3436;
-            --light-text: #636e72;
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-width: 1200px;
+        /* 容器 - 宽屏自适应 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1600px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 24px;
+            }
         }
 
         /* 导航栏 */
-        nav {
-            background: var(--white);
-            padding: 1rem 2rem;
-            position: fixed;
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            box-shadow: var(--shadow);
-            z-index: 1000;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 0;
+        }
+
+        .nav-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            gap: 32px;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-color);
             font-weight: 500;
-            transition: color 0.3s;
+            color: #334155;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: #3b82f6;
         }
 
-        /* 主容器 */
-        .container {
-            max-width: 1920px;
-            margin: 0 auto;
-            padding: 0 4rem;
-        }
-
-        /* 各区块通用样式 */
+        /* 通用区块 */
         section {
-            padding: 100px 0;
+            padding: 70px 0;
+            border-bottom: 1px solid #e9eef3;
         }
 
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-color);
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -0.3px;
+            position: relative;
+            display: inline-block;
         }
 
-        section h3 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 56px;
+            height: 3px;
+            background: #3b82f6;
+            border-radius: 4px;
         }
 
-        /* Hero 区域 - 首页 */
-        #home {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            text-align: center;
-            padding-top: 150px;
-            min-height: 600px;
+        /* Hero区域 */
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-radius: 32px;
+            margin-top: 20px;
+            padding: 56px 48px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            margin-bottom: 3rem;
-        }
-
-        /* 核心亮点 */
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            width: 300px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            color: var(--text-color);
-        }
-
-        .feature-icon {
+        .hero h1 {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #0f172a, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            margin-bottom: 20px;
         }
 
-        .feature-card h4 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
+        .hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            max-width: 680px;
+            margin-bottom: 42px;
         }
 
-        .feature-card p {
-            color: var(--light-text);
+        .highlight-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin-top: 20px;
         }
 
-        /* 内容列表 */
-        #articles {
-            background: var(--white);
+        .highlight-card {
+            flex: 1;
+            background: white;
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2ff;
+            transition: all 0.2s;
         }
 
-        .articles-grid {
+        .highlight-card:hover {
+            transform: translateY(-3px);
+            border-color: #cbdffc;
+            box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .highlight-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .highlight-card p {
+            color: #475569;
+            font-size: 0.98rem;
+        }
+
+        /* 榜单表格 */
+        .rank-table-wrapper {
+            background: white;
+            border-radius: 24px;
+            overflow-x: auto;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #edf2f7;
+        }
+
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 700px;
+        }
+
+        .rank-table th {
+            background: #f8fafc;
+            padding: 16px 14px;
+            font-weight: 600;
+            color: #1e293b;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .rank-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f0f2f8;
+            color: #1e293b;
+        }
+
+        .rank-table tr:hover td {
+            background-color: #fafcff;
+        }
+
+        .rank-number {
+            font-weight: 700;
+            color: #3b82f6;
+            width: 70px;
+        }
+
+        .badge {
+            background: #eef2ff;
+            color: #1e40af;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        /* 文章卡片 */
+        .posts-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
         }
 
-        .article-card {
-            background: var(--bg-color);
+        .post-card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px;
+            transition: all 0.2s;
+            border: 1px solid #eef2ff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .post-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .post-meta {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .post-card p {
+            color: #334155;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .placeholder-note {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #475569;
             border-radius: 12px;
-            padding: 1.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-
-        .article-card h3 {
-            margin-bottom: 1rem;
-        }
-
-        .article-card p {
-            color: var(--light-text);
-            margin-bottom: 1rem;
-        }
-
-        .article-meta {
-            font-size: 0.875rem;
-            color: var(--accent-color);
-        }
-
-        /* 关于我 */
-        #about {
-            background: var(--bg-color);
-        }
-
-        .about-content {
+        /* 关于 & 隐私 */
+        .double-grid {
             display: flex;
-            gap: 4rem;
-            align-items: center;
-            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 40px;
         }
 
-        .about-avatar {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--white);
-        }
-
-        .about-text {
+        .info-card {
+            background: white;
+            border-radius: 28px;
+            padding: 36px;
+            border: 1px solid #eef2ff;
             flex: 1;
         }
 
-        .about-text p {
-            margin-bottom: 1rem;
-            color: var(--light-text);
+        .info-card h2 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
         }
 
-        /* 隐私政策 */
-        #privacy {
-            background: var(--white);
+        .info-card p {
+            margin-bottom: 18px;
+            color: #2c3e5c;
         }
 
-        .privacy-content {
-            max-width: 800px;
-            margin-top: 2rem;
-        }
-
-        .privacy-content p {
-            color: var(--light-text);
-            margin-bottom: 1rem;
-        }
-
-        /* 页脚 */
         footer {
-            background: var(--text-color);
-            color: var(--white);
+            background: #f1f5f9;
             text-align: center;
-            padding: 2rem;
+            padding: 32px 20px;
+            color: #475569;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2e8f0;
         }
 
-        footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* 动画 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .feature-card, .article-card {
-            animation: fadeIn 0.6s ease-out;
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 36px 24px; }
+            .section-title { font-size: 1.7rem; }
+            section { padding: 50px 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 导航栏 -->
-    <nav>
-        <div class="logo">🎮 游戏排行榜</div>
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#articles">内容列表</a></li>
-            <li><a href="#about">关于我</a></li>
-            <li><a href="#privacy">隐私政策</a></li>
-        </ul>
-    </nav>
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">🎮 GameTop100</div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#rankings">🏆 TOP100榜单</a>
+            <a href="#articles">精选文章</a>
+            <a href="#about">关于我</a>
+            <a href="#privacy">隐私政策</a>
+        </div>
+    </div>
+</nav>
 
-    <!-- 首页 Hero -->
+<main>
+    <!-- 首页 Hero + 亮点 -->
     <section id="home">
         <div class="container">
-            <h1 class="hero-title">全球游戏排名前100名清单</h1>
-            <p class="hero-subtitle">精选全球最受欢迎的游戏，为你呈现最权威的游戏排行榜</p>
-            
-            <!-- 三个核心亮点 -->
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h4>权威数据</h4>
-                    <p>基于全球玩家评分、销量、活跃度等多维度综合排名</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h4>全球视野</h4>
-                    <p>覆盖PC、主机、手游全平台，囊括各类型热门游戏</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h4>实时更新</h4>
-                    <p>每月更新排名，紧跟游戏市场动态与玩家趋势</p>
+            <div class="hero">
+                <h1>探索·全球游戏前100名<br>殿堂级杰作指南</h1>
+                <p>基于销量、口碑、影响力综合评定，从像素时代到次世代，一份值得收藏的游戏编年史。</p>
+                <div class="highlight-grid">
+                    <div class="highlight-card">
+                        <h3>📊 权威视野</h3>
+                        <p>整合Metacritic、玩家票选与行业奖项，动态呈现TOP100排名，客观真实。</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>🎯 深度解析</h3>
+                        <p>不止于榜单，更有幕后故事、设计哲思与行业趋势，每周更新专题文章。</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>🌍 玩家社区</h3>
+                        <p>留下你的游戏回忆，与全球同好交流，共同书写游戏文化新篇章。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 内容列表 -->
+    <!-- 全球游戏排名前100清单 -->
+    <section id="rankings">
+        <div class="container">
+            <h2 class="section-title">🏅 全球游戏排名 · 前100名清单</h2>
+            <p style="margin-bottom: 24px; color: #2c3e66;">榜单融合历史销量、评分与开拓意义。数据动态参考行业权威。</p>
+            <div class="rank-table-wrapper">
+                <table class="rank-table">
+                    <thead>
+                        <tr><th>排名</th><th>游戏名称</th><th>首发年份</th><th>主要平台</th><th>代表荣誉</th></tr>
+                    </thead>
+                    <tbody id="rankTableBody">
+                        <!-- 动态生成100行，保证清晰整洁 -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 20px; font-size: 0.8rem; text-align: right; color: #5b6e8c;">✨ 排名综合媒体评分、玩家口碑与历史地位</div>
+        </div>
+    </section>
+
+    <!-- 三篇文章列表 (占位内容) -->
     <section id="articles">
         <div class="container">
-            <h2>内容列表</h2>
-            <p style="color: var(--light-text); margin-bottom: 2rem;">精选文章，带你深入了解游戏世界</p>
-            
-            <div class="articles-grid">
-                <div class="article-card">
-                    <h3>2026年最受期待的10款新游戏</h3>
-                    <p>从开放世界冒险到竞技射击，盘点今年即将发布的重磅新作...</p>
-                    <p class="article-meta">文章内容待补充</p>
+            <h2 class="section-title">📖 精选专题 · 游戏文化纵览</h2>
+            <div class="posts-grid">
+                <div class="post-card">
+                    <h3>🎮 JRPG黄金时代：从最终幻想到异度之刃</h3>
+                    <div class="post-meta"><span>📅 2026.05.28</span><span>⏱️ 7分钟阅读</span></div>
+                    <p>日式角色扮演游戏如何影响全球玩家？探讨叙事美学、回合制革新与开放世界融合，梳理三十年间JRPG的起承转合...</p>
+                    <div class="placeholder-note">📌 文章内容待补充 — 稍后手动替换成自己写的深度内容。</div>
                 </div>
-                <div class="article-card">
-                    <h3>独立游戏崛起：小团队的惊人创意</h3>
-                    <p>当大厂忙着做续作时，独立开发者用创新玩法征服了玩家...</p>
-                    <p class="article-meta">文章内容待补充</p>
+                <div class="post-card">
+                    <h3>🕹️ 独立游戏逆袭：从像素艺术到情感共鸣</h3>
+                    <div class="post-meta"><span>📅 2026.05.25</span><span>⏱️ 6分钟阅读</span></div>
+                    <p>独立开发者如何以小博大？《空洞骑士》《星露谷物语》《Hades》等现象级作品背后，创意与坚持才是破局关键。</p>
+                    <div class="placeholder-note">📌 文章内容待补充 — 期待精彩的独立游戏观察笔记。</div>
                 </div>
-                <div class="article-card">
-                    <h3>电竞风云：2026赛季展望</h3>
-                    <p>随着新赛季开启，各大战队蓄势待发，谁将问鼎冠军...</p>
-                    <p class="article-meta">文章内容待补充</p>
+                <div class="post-card">
+                    <h3>⚡ FPS进化史：雷神之锤到使命召唤的竞技革新</h3>
+                    <div class="post-meta"><span>📅 2026.05.22</span><span>⏱️ 9分钟阅读</span></div>
+                    <p>从局域网对战到电竞全球化，FPS品类改变了游戏交互逻辑。技术迭代与地图设计如何重塑玩家体验...</p>
+                    <div class="placeholder-note">📌 文章内容待补充 — 这里专属创作空间。</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 关于我 -->
+    <!-- 关于我 + 隐私政策 -->
     <section id="about">
         <div class="container">
-            <h2>关于我</h2>
-            <div class="about-content">
-                <div class="about-avatar">👤</div>
-                <div class="about-text">
-                    <h3>作者介绍</h3>
-                    <p>我是一名热爱游戏的玩家，从童年起便沉迷于各种游戏世界。多年来，我见证了游戏行业的蓬勃发展，也积累了对各类游戏的独特见解。</p>
-                    <p>这个网站是我分享游戏见解的平台。我希望通过这份全球游戏排名清单，帮助更多玩家发现优质游戏，同时也记录下我对游戏世界的观察与思考。</p>
-                    <p><strong>网站用途：</strong>整理并分享全球最受欢迎的游戏排名，提供游戏评测、行业动态、玩家故事等内容，为游戏爱好者提供一个交流与发现的空间。</p>
+            <div class="double-grid">
+                <div class="info-card">
+                    <h2>📖 关于我</h2>
+                    <p>你好！我是7 — 游戏叙事爱好者，独立开发者。从业游戏媒体近8年，深信每一款佳作都是第九艺术的星辰。</p>
+                    <p><strong>这个网站的用途</strong>：建立客观且富有人文温度的全球游戏TOP100档案，为新老玩家提供参考坐标。同时分享深度分析与评测，打造属于所有玩家的精神驿站。榜单随游戏产业迭代微调，欢迎随时交流。</p>
+                    <p>📧 联系: gametop100@outlook.com  |  🐦 社交: @GameRankHub</p>
+                </div>
+                <div class="info-card" id="privacy">
+                    <h2>🔒 隐私政策</h2>
+                    <p>本网站尊重并保护所有用户的个人信息。我们不会收集任何个人身份数据，仅使用匿名访问统计（无Cookie追踪）。任何用户留言或联系方式均为自愿行为。</p>
+                    <p>本站不向第三方出售或分享用户数据。如有隐私相关疑问，可通过邮箱联系管理员。</p>
+                    <p>生效日期：2026年5月30日 · 占位说明，后续随网站迭代完善。</p>
                 </div>
             </div>
         </div>
     </section>
+</main>
 
-    <!-- 隐私政策 -->
-    <section id="privacy">
-        <div class="container">
-            <h2>隐私政策</h2>
-            <div class="privacy-content">
-                <h3 style="margin-bottom: 1rem;">数据收集与使用</h3>
-                <p>本网站尊重用户隐私，不主动收集任何个人信息。浏览本网站时，我们不会记录您的身份信息或浏览行为。</p>
-                
-                <h3 style="margin: 2rem 0 1rem;">Cookie 使用</h3>
-                <p>本网站不使用任何跟踪 Cookie。您的浏览体验完全私密且安全。</p>
-                
-                <h3 style="margin: 2rem 0 1rem;">第三方链接</h3>
-                <p>本网站可能包含指向外部网站的链接。这些外部网站的隐私政策不在本声明范围内，建议您阅读相关网站的隐私政策。</p>
-                
-                <h3 style="margin: 2rem 0 1rem;">政策更新</h3>
-                <p>本隐私政策可能随时更新。如有重大变更，我们将在网站上发布通知。</p>
-                
-                <p style="margin-top: 2rem;"><strong>最后更新日期：</strong>2026年5月28日</p>
-            </div>
-        </div>
-    </section>
+<footer>
+    <div class="container">
+        <p>© 2026 全球游戏殿堂 GameTop100 — 致敬每一位玩家与创作者 | 宽屏自适应 · 简洁清新风格</p>
+    </div>
+</footer>
 
-    <!-- 页脚 -->
-    <footer>
-        <p>&copy; 2026 全球游戏排名前100名清单 | 联系邮箱：placeholder@example.com</p>
-        <p style="margin-top: 0.5rem; opacity: 0.7;">
-            <a href="#home">首页</a> · 
-            <a href="#articles">内容列表</a> · 
-            <a href="#about">关于我</a> · 
-            <a href="#privacy">隐私政策</a>
-        </p>
-    </footer>
+<script>
+    // 生成前100名游戏数据 (真实游戏名称，呈现完整清单)
+    const topList = [
+        {rank:1, name:"塞尔达传说：旷野之息", year:2017, platform:"Nintendo Switch", honor:"TGA年度游戏/开放世界天花板"},
+        {rank:2, name:"超级马里奥：奥德赛", year:2017, platform:"Nintendo Switch", honor:"3D平台跳跃教科书"},
+        {rank:3, name:"巫师3：狂猎", year:2015, platform:"PC/PS4/Xbox", honor:"最佳叙事 & 血与酒DLC"},
+        {rank:4, name:"荒野大镖客：救赎2", year:2018, platform:"PS4/Xbox/PC", honor:"沉浸式西部史诗"},
+        {rank:5, name:"艾尔登法环", year:2022, platform:"多平台", honor:"2022年度游戏 魂系集大成"},
+        {rank:6, name:"传送门2", year:2011, platform:"PC/PS3/X360", honor:"满分解谜设计"},
+        {rank:7, name:"最后生还者", year:2013, platform:"PS3/PS4", honor:"情感冲击巅峰"},
+        {rank:8, name:"生化危机4 重制版", year:2023, platform:"全平台", honor:"经典重铸完美典范"},
+        {rank:9, name:"战神（2018）", year:2018, platform:"PS4/PC", honor:"北欧战神重启杰作"},
+        {rank:10, name:"我的世界", year:2011, platform:"全平台", honor:"销量超3亿/沙盒神作"},
+        {rank:11, name:"半条命2", year:2004, platform:"PC", honor:"物理引擎革命"},
+        {rank:12, name:"女神异闻录5 皇家版", year:2019, platform:"多平台", honor:"时髦值满点的JRPG"},
+        {rank:13, name:"质量效应2", year:2010, platform:"PC/X360", honor:"科幻RPG标杆"},
+        {rank:14, name:"光环3", year:2007, platform:"Xbox 360", honor:"主机FPS神作"},
+        {rank:15, name:"合金装备3：食蛇者", year:2004, platform:"PS2", honor:"谍战潜行巅峰"},
+        {rank:16, name:"GTA V", year:2013, platform:"全平台", honor:"开放世界商业奇迹"},
+        {rank:17, name:"超级密特罗德", year:1994, platform:"SFC", honor:"银河城奠基之作"},
+        {rank:18, name:"时空之轮", year:1995, platform:"SFC", honor:"JRPG永恒经典"},
+        {rank:19, name:"血源诅咒", year:2015, platform:"PS4", honor:"克苏鲁美学极限"},
+        {rank:20, name:"毁灭战士：永恒", year:2020, platform:"多平台", honor:"爽快纯粹FPS"},
+        {rank:21, name:"星际拓荒", year:2019, platform:"多平台", honor:"探索驱动的叙事奇迹"},
+        {rank:22, name:"空洞骑士", year:2017, platform:"多平台", honor:"独立游戏神作"},
+        {rank:23, name:"极乐迪斯科", year:2019, platform:"多平台", honor:"CRPG叙事革命"},
+        {rank:24, name:"最终幻想7 重制版", year:2020, platform:"PS4/PC", honor:"情怀与革新并重"},
+        {rank:25, name:"任天堂明星大乱斗 特别版", year:2018, platform:"Switch", honor:"全明星嘉年华"},
+        {rank:26, name:"文明6", year:2016, platform:"多平台", honor:"再来一回合的魔力"},
+        {rank:27, name:"泰坦陨落2", year:2016, platform:"多平台", honor:"最佳单人战役之一"},
+        {rank:28, name:"耻辱2", year:2016, platform:"多平台", honor:"关卡设计教科书"},
+        {rank:29, name:"奥日与萤火意志", year:2020, platform:"多平台", honor:"美与艺术的交融"},
+        {rank:30, name:"神界：原罪2", year:2017, platform:"多平台", honor:"回合制RPG巅峰"},
+        {rank:31, name:"如龙0", year:2015, platform:"多平台", honor:"极道热血戏剧"},
+        {rank:32, name:"尼尔：机械纪元", year:2017, platform:"多平台", honor:"横尾太郎哲学"},
+        {rank:33, name:"星露谷物语", year:2016, platform:"多平台", honor:"一人制作的田园牧歌"},
+        {rank:34, name:"集合啦！动物森友会", year:2020, platform:"Switch", honor:"社交治愈现象级"},
+        {rank:35, name:"俄罗斯方块效应", year:2018, platform:"多平台", honor:"音游与经典完美融合"},
+        {rank:36, name:"生化奇兵", year:2007, platform:"多平台", honor:"反乌托邦叙事巅峰"},
+        {rank:37, name:"见证者", year:2016, platform:"多平台", honor:"解谜与哲学"},
+        {rank:38, name:"杀出重围:人类革命", year:2011, platform:"多平台", honor:"赛博朋克经典"},
+        {rank:39, name:"火焰纹章：风花雪月", year:2019, platform:"Switch", honor:"SRPG新高度"},
+        {rank:40, name:"守望先锋", year:2016, platform:"多平台", honor:"开创英雄射击时代"},
+        {rank:41, name:"帝国时代2", year:1999, platform:"PC", honor:"RTS常青树"},
+        {rank:42, name:"辐射:新维加斯", year:2010, platform:"多平台", honor:"黑曜石叙事杰作"},
+        {rank:43, name:"博德之门3", year:2023, platform:"PC/PS5", honor:"CRPG复兴象征"},
+        {rank:44, name:"控制", year:2019, platform:"多平台", honor:"新怪谈视觉奇观"},
+        {rank:45, name:"地铁:离去", year:2019, platform:"多平台", honor:"末世氛围极致"},
+        {rank:46, name:"死亡细胞", year:2018, platform:"多平台", honor:"Roguelite动作佳作"},
+        {rank:47, name:"哈迪斯", year:2020, platform:"多平台", honor:"Supergiant又一神作"},
+        {rank:48, name:"对马岛之魂", year:2020, platform:"PS4/PS5/PC", honor:"武士电影美学"},
+        {rank:49, name:"地平线 零之曙光", year:2017, platform:"多平台", honor:"机械恐龙奇观"},
+        {rank:50, name:"异度之刃2", year:2017, platform:"Switch", honor:"宏大JRPG冒险"},
+        {rank:51, name:"极限竞速 地平线5", year:2021, platform:"多平台", honor:"开放世界赛车巅峰"},
+        {rank:52, name:"漫威蜘蛛侠", year:2018, platform:"PS4/PS5", honor:"超级英雄改编标杆"},
+        {rank:53, name:"战神：诸神黄昏", year:2022, platform:"PS4/PS5", honor:"史诗终章"},
+        {rank:54, name:"异界锁链", year:2019, platform:"Switch", honor:"白金工作室创意动作"},
+        {rank:55, name:"十三机兵防卫圈", year:2019, platform:"PS4/Switch", honor:"群像叙事艺术"},
+        {rank:56, name:"八方旅人", year:2018, platform:"多平台", honor:"HD-2D先驱"},
+        {rank:57, name:"最终幻想14", year:2013, platform:"多平台", honor:"MMORPG复兴神话"},
+        {rank:58, name:"糖豆人", year:2020, platform:"多平台", honor:"休闲竞技爆款"},
+        {rank:59, name:"双人成行", year:2021, platform:"多平台", honor:"2021年度游戏 合作必玩"},
+        {rank:60, name:"武士零", year:2019, platform:"多平台", honor:"快节奏赛博忍者"},
+        {rank:61, name:"死亡搁浅", year:2019, platform:"多平台", honor:"小岛秀夫连接哲学"},
+        {rank:62, name:"幽灵行者", year:2020, platform:"多平台", honor:"跑酷斩击酷炫"},
+        {rank:63, name:"古墓丽影 崛起", year:2015, platform:"多平台", honor:"重启版巅峰"},
+        {rank:64, name:"神秘海域4", year:2016, platform:"PS4", honor:"电影化冒险极致"},
+        {rank:65, name:"猎天使魔女2", year:2014, platform:"WiiU/Switch", honor:"华丽动作天尊"},
+        {rank:66, name:"茶杯头", year:2017, platform:"多平台", honor:"上世纪动画艺术"},
+        {rank:67, name:"吸血鬼幸存者", year:2021, platform:"多平台", honor:"极简逆向弹幕玩法"},
+        {rank:68, name:"笼中窥梦", year:2021, platform:"多平台", honor:"国产视错觉解谜"},
+        {rank:69, name:"恶灵附身2", year:2017, platform:"多平台", honor:"三上真司式恐怖"},
+        {rank:70, name:"黎明杀机", year:2016, platform:"多平台", honor:"非对称竞技开创者"},
+        {rank:71, name:"盗贼之海", year:2018, platform:"Xbox/PC", honor:"海贼沙盒欢乐联机"},
+        {rank:72, name:"怪物猎人：世界", year:2018, platform:"多平台", honor:"共斗游戏破圈之作"},
+        {rank:73, name:"勇者斗恶龙11S", year:2017, platform:"多平台", honor:"王道JRPG顶点"},
+        {rank:74, name:"洛克人11", year:2018, platform:"多平台", honor:"经典回归典范"},
+        {rank:75, name:"索尼克 未知边境", year:2022, platform:"多平台", honor:"开放领域新尝试"},
+        {rank:76, name:"怒之铁拳4", year:2020, platform:"多平台", honor:"横版清关复兴"},
+        {rank:77, name:"信使", year:2018, platform:"多平台", honor:"忍者龙剑传精神续作"},
+        {rank:78, name:"蔚蓝", year:2018, platform:"多平台", honor:"硬核平台跳跃神作"},
+        {rank:79, name:"小丑牌", year:2024, platform:"多平台", honor:"2024黑马肉鸽卡牌"},
+        {rank:80, name:"幻兽帕鲁", year:2024, platform:"多平台", honor:"现象级生存建造"},
+        {rank:81, name:"动物井", year:2024, platform:"多平台", honor:"精妙类银河城"},
+        {rank:82, name:"地狱之刃2", year:2024, platform:"Xbox/PC", honor:"视听心理恐怖极致"},
+        {rank:83, name:"最终幻想16", year:2023, platform:"PS5/PC", honor:"召唤兽大战史诗"},
+        {rank:84, name:"歧路旅人2", year:2023, platform:"多平台", honor:"HD-2D完美进化"},
+        {rank:85, name:"星空", year:2023, platform:"Xbox/PC", honor:"B社太空RPG巨制"},
+        {rank:86, name:"匹诺曹的谎言", year:2023, platform:"多平台", honor:"魂系佳作"},
+        {rank:87, name:"原子之心", year:2023, platform:"多平台", honor:"苏式美学FPS"},
+        {rank:88, name:"完美音浪", year:2023, platform:"多平台", honor:"节奏动作惊喜"},
+        {rank:89, name:"街头霸王6", year:2023, platform:"多平台", honor:"格斗游戏新时代"},
+        {rank:90, name:"暗黑破坏神4", year:2023, platform:"多平台", honor:"暗黑刷宝回归"},
+        {rank:91, name:"赛博朋克2077", year:2020, platform:"多平台", honor:"2.0版逆转口碑"},
+        {rank:92, name:"霍格沃茨之遗", year:2023, platform:"多平台", honor:"魔法世界圆梦"},
+        {rank:93, name:"死亡空间 重制版", year:2023, platform:"多平台", honor:"恐怖重制标杆"},
+        {rank:94, name:"火焰纹章Engage", year:2023, platform:"Switch", honor:"战棋系统集大成"},
+        {rank:95, name:"永恒之夜", year:2024, platform:"多平台", honor:"暗黑童话动作"},
+        {rank:96, name:"蟹蟹寻宝奇遇", year:2024, platform:"多平台", honor:"环保题材魂系"},
+        {rank:97, name:"星刃", year:2024, platform:"PS5", honor:"动作美学新星"},
+        {rank:98, name:"波斯王子：失落的王冠", year:2024, platform:"多平台", honor:"银河城回归佳作"},
+        {rank:99, name:"浪漫沙加2 重制版", year:2024, platform:"多平台", honor:"经典JRPG重生"},
+        {rank:100, name:"潜行者2", year:2024, platform:"Xbox/PC", honor:"末世生存FPS"}
+    ];
 
+    const tbody = document.getElementById('rankTableBody');
+    if(tbody) {
+        for(let game of topList.slice(0,100)) {
+            const row = `<tr>
+                <td class="rank-number">#${game.rank}</td>
+                <td><strong>${game.name}</strong></td>
+                <td>${game.year}</td>
+                <td>${game.platform}</td>
+                <td><span class="badge">${game.honor.substring(0, 28)}${game.honor.length>28?'…':''}</span></td>
+            </tr>`;
+            tbody.insertAdjacentHTML('beforeend', row);
+        }
+    }
+
+    // 平滑滚动
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href && href.startsWith('#')){
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if(target) target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }
+        });
+    });
+</script>
 </body>
 </html>
