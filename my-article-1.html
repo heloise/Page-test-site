@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情 | 全球游戏殿堂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* 容器 - 宽屏自适应 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1600px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        /* 导航栏 (与首页完全一致) */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #334155;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        /* 文章详情主区域 */
+        .article-wrapper {
+            padding: 60px 0 80px;
+        }
+
+        /* 文章标题区域 */
+        .article-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .article-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9eef3;
+            border-bottom: 1px solid #e9eef3;
+            padding: 14px 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .article-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 正文区域 - 灰色占位框 */
+        .article-content {
+            background: #f1f5f9;
+            border-radius: 28px;
+            padding: 60px 56px;
+            margin-bottom: 60px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .placeholder-body {
+            color: #475569;
+            font-size: 1.1rem;
+            padding: 40px 20px;
+            background: #ffffffcc;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+
+        .placeholder-body p {
+            margin: 16px 0;
+        }
+
+        /* 相关推荐区域 */
+        .related-section {
+            margin-top: 40px;
+        }
+
+        .related-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: #0f172a;
+            position: relative;
+            display: inline-block;
+        }
+
+        .related-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 16px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid #eef2ff;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .related-card:hover {
+            transform: translateY(-3px);
+            border-color: #cbdffc;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-card h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .related-card p {
+            color: #5b6e8c;
+            font-size: 0.85rem;
+        }
+
+        .related-placeholder {
+            color: #3b82f6;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            display: inline-block;
+        }
+
+        /* 底部版权 (与首页一致) */
+        footer {
+            background: #f1f5f9;
+            text-align: center;
+            padding: 32px 20px;
+            color: #475569;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .article-title { font-size: 2rem; }
+            .article-content { padding: 32px 24px; }
+            .container { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 统一头部导航 (与原首页完全一致) -->
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">🎮 GameTop100</div>
+        <div class="nav-links">
+            <a href="game_rankings.html">首页</a>
+            <a href="game_rankings.html#rankings">🏆 TOP100榜单</a>
+            <a href="game_rankings.html#articles">精选文章</a>
+            <a href="game_rankings.html#about">关于我</a>
+            <a href="game_rankings.html#privacy">隐私政策</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="container article-wrapper">
+        <!-- 文章标题区域（居中大号字） -->
+        <div class="article-header">
+            <h1 class="article-title">【占位标题】深入解读游戏设计的艺术与哲思</h1>
+            <div class="article-meta">
+                <span>📝 作者：777</span>
+                <span>📅 发布日期：2026年5月30日</span>
+                <span>⏱️ 阅读时长：约 8 分钟</span>
+            </div>
+        </div>
+
+        <!-- 正文区域（灰色背景占位框） -->
+        <div class="article-content">
+            <div class="placeholder-body">
+                <p>📌 文章正文待补充...</p>
+                <p>这里将展示完整的文章内容。您可以替换成自己的深度分析、游戏评测或文化杂谈。</p>
+                <p style="margin-top: 20px; color: #3b82f6;">※ 本区域为占位框，正式发布前请替换为真实文字、图片、引用等丰富内容。</p>
+                <p>支持段落、列表、加粗、图片等多种富文本元素。</p>
+            </div>
+        </div>
+
+        <!-- 相关推荐区域（3个链接占位） -->
+        <div class="related-section">
+            <h2 class="related-title">📚 相关推荐</h2>
+            <div class="related-grid">
+                <a href="#" class="related-card">
+                    <h4>🎮 JRPG黄金时代：从最终幻想到异度之刃</h4>
+                    <p>日式角色扮演游戏如何影响全球玩家？探讨叙事美学与回合制革新...</p>
+                    <span class="related-placeholder">阅读全文 →</span>
+                </a>
+                <a href="#" class="related-card">
+                    <h4>🕹️ 独立游戏逆袭：从像素艺术到情感共鸣</h4>
+                    <p>独立开发者如何以小博大？《空洞骑士》《Hades》等现象级作品背后...</p>
+                    <span class="related-placeholder">阅读全文 →</span>
+                </a>
+                <a href="#" class="related-card">
+                    <h4>⚡ FPS进化史：雷神之锤到使命召唤的竞技革新</h4>
+                    <p>从局域网对战到电竞全球化，FPS品类改变了游戏交互逻辑...</p>
+                    <span class="related-placeholder">阅读全文 →</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 底部版权（与原首页一致） -->
+<footer>
+    <div class="container">
+        <p>© 2026 全球游戏殿堂 GameTop100 — 致敬每一位玩家与创作者 | 宽屏自适应 · 简洁清新风格</p>
+    </div>
+</footer>
+
+<script>
+    // 可选：平滑滚动 (仅针对站内锚点)
+    document.querySelectorAll('.nav-links a, .related-card').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href && href.startsWith('#') && href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if(target) target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }
+        });
+    });
+</script>
+</body>
+</html>
